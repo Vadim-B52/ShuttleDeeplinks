@@ -11,15 +11,101 @@
 
     alert(`Тебе лет!`); // Тебе 100 лет!
     // inputElement.style.visibility = 'hidden'; // hide it again
-}); -->
-</script>
+});
+</script> -->
+
+
+
+
 <body>
 
+  <h2>Ссылки на маршруты:</h2>
+  <ul id="routesList"></ul>
 
-<a href="yandextaxi://route?tariffClass=intercity_shuttle&start-lat=45.035470&start-lon=38.975313&end-lat=44.894269&end-lon=37.316906
-">Краснодар-Анапа</a>
+  <script>
+
+    const data = [
+      { city: 'Краснодар', type: 'Отправление', lat: 45.011737, lon: 39.067258 },
+      { city: 'Краснодар', type: 'Прибытие', lat: 45.014148, lon: 39.062979 },
+      { city: 'Новороссийск', type: 'Прибытие', lat: 44.726948, lon: 37.765198 },
+      { city: 'Новороссийск', type: 'Отправление', lat: 44.729567, lon: 37.756780 },
+      { city: 'Геленджик', type: 'Отправление', lat: 44.590565, lon: 38.048662 },
+      { city: 'Геленджик', type: 'Прибытие', lat: 44.560782, lon: 38.082766 },
+      { city: 'Ростов', type: 'Отправление', lat: 47.237743, lon: 39.595592 },
+      { city: 'Ростов', type: 'Прибытие', lat: 47.206912, lon: 39.725929 },
+      { city: 'Анапа', type: 'Отправление', lat: 44.881237, lon: 37.338138 },
+      { city: 'Анапа', type: 'Прибытие', lat: 44.881237, lon: 37.338138 },
+    ];
+    
+    const dictionary = {};
+    
+    data.forEach(({ city, type, lat, lon }) => {
+      const key = `${city} ${type}`;
+      dictionary[key] = { lat, lon };
+    });
+    
+    
+    const cities = [
+      ['Анапа'],
+      ['Геленджик'],
+      ['Новороссийск'],
+      ['Ростов'],
+    ];
+    
+    cities.forEach(city => {
+      const a1 = 'Краснодар'
+      const b1 = city
+      const coordsA1 = dictionary[`${a1} Отправление`];
+      const coordsB1 = dictionary[`${b1} Прибытие`];
+      const link1 = `yandextaxi://route?tariffClass=intercity_shuttle&start-lat=${coordsA1.lat}&start-lon=${coordsA1.lon}&end-lat=${coordsB1.lat}&end-lon=${coordsB1.lon}`;
+    
+      const a2 = city
+      const b2 = 'Краснодар'
+      const coordsA2 = dictionary[`${a2} Отправление`];
+      const coordsB2 = dictionary[`${b2} Прибытие`];
+      const link2 = `yandextaxi://route?tariffClass=intercity_shuttle&start-lat=${coordsA2.lat}&start-lon=${coordsA2.lon}&end-lat=${coordsB2.lat}&end-lon=${coordsB2.lon}`;
+
+      const listItem1 = document.createElement('li');
+      const anchor1 = document.createElement('a');
+      anchor1.href = link1;
+      anchor1.target = '_blank';
+      anchor1.textContent = `${a1} - ${b1}`;
+
+      listItem1.appendChild(anchor1);
+      routesList.appendChild(listItem1);
+
+      const listItem2 = document.createElement('li');
+      const anchor2 = document.createElement('a');
+      anchor2.href = link2;
+      anchor2.target = '_blank';
+      anchor2.textContent = `${a2} - ${b2}`;
+                            
+      listItem2.appendChild(anchor2);
+      routesList.appendChild(listItem2);
+
+    
+
+      // print(anchor.text);
+    });
+    
+    </script>
+
+
+  <!-- Краснодар	Отправление	45.011737	39.067258
+  Краснодар	Прибытие	45.014148	39.062979
+  Новороссийск	Прибытие	44.726948	37.765198
+  Новороссийск	Отправление	44.729567	37.756780
+  Геленджик	Отправление	44.590565	38.048662
+  Геленджик	Прибытие	44.560782	38.082766
+  Ростов-на-Дону	Отправление	47.237743	39.595592
+  Ростов-на-Дону	Прибытие	47.206912	39.725929
+  Анапа	Отправление	44.881237	37.338138
+  Анапа	Прибытие	44.881237	37.338138
+        
+
+<a href="">Краснодар-Анапа</a>
 <br>
-<a href="yandextaxi://route?tariffClass=intercity_shuttle&end-lat=45.035470&end-lon=38.975313&start-lat=44.894269&start-lon=37.316906">Анапа-Краснодар</a>
+<a href="yandextaxi://route?tariffClass=intercity_shuttle&end-lat=45.035470&end-lon=38.975313&start-lat=44.880085&start-lon=37.339149">Анапа-Краснодар</a>
 <br>
 <br>
 <a href="yandextaxi://route?tariffClass=intercity_shuttle&start-lat=45.035470&start-lon=38.975313&end-lat=44.723771&end-lon=37.768813">Краснодар-Новороссийск </a>
@@ -36,7 +122,7 @@
 <br>
 <a href="yandextaxi://route?tariffClass=intercity_shuttle&end-lat=45.035470&end-lon=38.975313&start-lat=44.561012&start-lon=38.077115">Геленджик-Краснодар</a>
 <br>
-<br>
+<br> -->
 
 </body>
 
