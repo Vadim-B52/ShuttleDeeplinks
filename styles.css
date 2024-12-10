@@ -33,7 +33,7 @@ a:hover {
   text-decoration: underline; /* Подчеркивание при наведении для визуальной индикации */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 430px) {
   body {
     padding: 5px;
   }
